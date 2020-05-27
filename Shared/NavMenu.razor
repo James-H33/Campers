@@ -1,0 +1,24 @@
+<div class="nav-menu">
+    <div class="nav-menu-content">
+        <h4>
+            YelpCamp
+        </h4>
+
+        <div class="nav-menu-items">
+            @if (isLoggedIn) 
+            {
+                <div>UserName Here</div>
+                <AnchorTag HasLink="false">Logout</AnchorTag>
+            } 
+            else 
+            {
+                <AnchorTag LinkUrl="/login">Login</AnchorTag>
+            }
+        </div>
+    </div>
+</div>
+
+@code 
+{
+    public bool isLoggedIn = false;
+}

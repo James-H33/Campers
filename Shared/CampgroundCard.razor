@@ -1,0 +1,20 @@
+
+@using Campers.Models
+
+<div class="campground-card">
+    <Card>
+        <div 
+            class="campground-card-image" 
+            style="background-image:url('http://www.fs.usda.gov/Internet/FSE_MEDIA/stelprdb5259404.jpg')">
+        </div>
+        
+        <label>@Item.Title</label>
+        <button>More Info</button>
+    </Card>
+</div>
+
+@code 
+{
+    [Parameter]
+    public Campground Item { get; set; }
+}

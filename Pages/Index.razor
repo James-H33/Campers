@@ -1,0 +1,50 @@
+﻿@page "/"
+
+@using Campers.Models
+
+<Jumbotron /> 
+
+<CampgroundList Campgrounds="@campgrounds" />
+
+@code 
+{
+    public List<Campground> campgrounds { get; set; } = new List<Campground>();
+
+    protected override void OnInitialized() 
+    {
+        campgrounds.Add(
+            new Campground {
+                Image = "http://www.fs.usda.gov/Internet/FSE_MEDIA/stelprdb5259404.jpg",
+                Title = "Devils Nest"
+            }
+        );
+
+        campgrounds.Add(
+             new Campground {
+                Image = "http://www.fs.usda.gov/Internet/FSE_MEDIA/stelprdb5259404.jpg",
+                Title = "Duncan Valley"
+            }
+        );
+
+        campgrounds.Add(
+             new Campground {
+                Image = "http://www.fs.usda.gov/Internet/FSE_MEDIA/stelprdb5259404.jpg",
+                Title = "Duncan Valley"
+            }
+        );
+
+        campgrounds.Add(
+             new Campground {
+                Image = "http://www.fs.usda.gov/Internet/FSE_MEDIA/stelprdb5259404.jpg",
+                Title = "Duncan Valley"
+            }
+        );
+        
+        campgrounds.Add(
+             new Campground {
+                Image = "http://www.fs.usda.gov/Internet/FSE_MEDIA/stelprdb5259404.jpg",
+                Title = "Duncan Valley"
+            }
+        );
+    }
+}

@@ -1,0 +1,25 @@
+
+@if (HasLink) 
+{
+    <a class="link" href="@LinkUrl">
+        @ChildContent
+    </a>
+}
+else {
+    <a class="link" href="javascript:void(0)">
+        @ChildContent
+    </a>
+}
+
+@code 
+{
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string LinkUrl { get; set; } = "";
+
+    [Parameter]
+    public bool HasLink { get; set; } = true; 
+}

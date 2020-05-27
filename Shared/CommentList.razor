@@ -1,0 +1,20 @@
+@using Campers.Models
+
+<div class="comments">
+    @foreach (var comment in Comments)
+    {
+        <Comment />
+    }
+</div>
+
+@code
+{
+    [Parameter]
+    public List<Comment> Comments { get; set; } = new List<Comment>();
+
+    protected override void OnInitialized() 
+    {
+        Comments.Add(new Comment());
+        Comments.Add(new Comment());
+    }
+}
