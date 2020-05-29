@@ -6,7 +6,7 @@
     <Card>
         <div 
             class="campground-card-image" 
-            style="background-image:url('https://assets-us-01.kc-usercontent.com/04049059-9f97-00fa-b634-0afc144f58a8/6345e417-8672-40bf-a8f5-e916304a7a3c/35200-product-image-1.jpg')">
+            style="background-image:url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')">
         </div>
         
         <label>@Item.Title</label>
@@ -22,7 +22,6 @@
 
     public void MoreInfo()
     {
-        Console.WriteLine(Item.Id);
         NavigationManager.NavigateTo($"/campground/{Item.Id}");
     }
 }
