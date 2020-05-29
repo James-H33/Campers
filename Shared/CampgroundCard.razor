@@ -1,15 +1,16 @@
 
 @using Campers.Models
+@inject NavigationManager NavigationManager;
 
 <div class="campground-card">
     <Card>
         <div 
             class="campground-card-image" 
-            style="background-image:url('http://www.fs.usda.gov/Internet/FSE_MEDIA/stelprdb5259404.jpg')">
+            style="background-image:url('https://assets-us-01.kc-usercontent.com/04049059-9f97-00fa-b634-0afc144f58a8/6345e417-8672-40bf-a8f5-e916304a7a3c/35200-product-image-1.jpg')">
         </div>
         
         <label>@Item.Title</label>
-        <button>More Info</button>
+        <button @onclick="@MoreInfo">More Info</button>
     </Card>
 </div>
 
@@ -17,4 +18,11 @@
 {
     [Parameter]
     public Campground Item { get; set; }
+
+
+    public void MoreInfo()
+    {
+        Console.WriteLine(Item.Id);
+        NavigationManager.NavigateTo($"/campground/{Item.Id}");
+    }
 }

@@ -1,0 +1,17 @@
+﻿.campground-card {
+    display: grid;
+    width: 100%;
+    max-width: 320px;
+
+    .c-card {
+        display: grid;
+        text-align: center;
+    }
+}
+
+.campground-card-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
