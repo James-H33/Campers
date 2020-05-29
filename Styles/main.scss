@@ -1,0 +1,9 @@
+﻿@import './vars/_vars.scss';
+@import './atoms/_atoms.scss';
+@import './molecules/_molecules.scss';
+@import './pages/_pages.scss';
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
