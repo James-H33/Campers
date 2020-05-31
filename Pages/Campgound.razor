@@ -1,17 +1,22 @@
 @page "/campground/{Id}"
 
 <div class="campground-page">
+    <div class="campground-page-back">
+        <NavLink href="/">Back</NavLink>
+    </div>
     <div class="campground-page-info">
         <Card>
             <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80" alt="">
-            <h5>Devils Canyon</h5>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque aperiam quis voluptate quo vel, autem omnis dolorem ipsum tempore nesciunt veritatis libero sint. Natus quasi expedita ex architecto exercitationem quas?</p>
+            <div class="campground-page-info-description">
+                <h5>Devils Canyon</h5>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque aperiam quis voluptate quo vel, autem omnis dolorem ipsum tempore nesciunt veritatis libero sint. Natus quasi expedita ex architecto exercitationem quas?</p>
+            </div>
         </Card> 
     </div>
 
-    <div class="">
+    <div class="campground-page-comments">
         <Card>
-            <h4>Comments</h4>
+            <h5>Comments</h5>
             <CommentList />    
         </Card>
     </div>

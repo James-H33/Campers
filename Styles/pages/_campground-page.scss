@@ -1,7 +1,28 @@
-﻿.campground-page-info {
+﻿.campground-page {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-template-areas: 
+        "Back Info"
+        "Back Comments";
+}
+
+.campground-page-info {
+    grid-area: Info;
     margin-bottom: 30px;
+
+    .campground-page-info-description {
+        margin-top: 10px;
+    }
 
     img {
         width: 100%;
     }
+}
+
+.campground-page-back {
+    grid-area: Back;
+}
+
+.campground-page-comments {
+    grid-area: Comments;
 }

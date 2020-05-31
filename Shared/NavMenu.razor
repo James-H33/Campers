@@ -1,6 +1,8 @@
+@inject NavigationManager Url
+
 <div class="nav-menu">
     <div class="nav-menu-content">
-        <h4>
+        <h4 @onclick="@Navigate">
             YelpCamp
         </h4>
 
@@ -21,4 +23,9 @@
 @code 
 {
     public bool isLoggedIn = false;
+
+    public void Navigate() 
+    {
+        Url.NavigateTo("/");
+    }
 }
