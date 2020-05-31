@@ -1,5 +1,9 @@
 ﻿.c-card {
     box-shadow: $boxShadow;
-    padding: 10px;
+    padding: 20px;
     border-radius: 6px;
+
+    &.medium {
+        box-shadow: $boxShadow-medium;
+    }
 }

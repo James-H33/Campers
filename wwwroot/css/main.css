@@ -6,12 +6,16 @@
   border: none; }
 
 .c-card {
-  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12);
-  padding: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  padding: 20px;
   border-radius: 6px; }
+  .c-card.medium {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
 
 .nav-menu {
   box-shadow: 0px 1px 4px #e6e9ec; }
+  .nav-menu h4 {
+    cursor: pointer; }
 
 .nav-menu-content {
   display: grid;
@@ -48,11 +52,33 @@
   grid-row-gap: 2em;
   grid-column-gap: 1em; }
 
+footer {
+  padding: 50px 0;
+  margin-top: 60px;
+  text-align: center;
+  background: #000;
+  color: white; }
+
+.campground-page {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-template-areas: "Back Info" "Back Comments"; }
+
 .campground-page-info {
+  grid-area: Info;
   margin-bottom: 30px; }
+  .campground-page-info .campground-page-info-description {
+    margin-top: 10px; }
   .campground-page-info img {
     width: 100%; }
 
+.campground-page-back {
+  grid-area: Back; }
+
+.campground-page-comments {
+  grid-area: Comments; }
+
 .content {
   max-width: 1200px;
+  padding-top: 20px;
   margin: 0 auto; }
