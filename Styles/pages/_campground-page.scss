@@ -1,9 +1,16 @@
 ﻿.campground-page {
     display: grid;
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: 1fr;
     grid-template-areas: 
-        "Back Info"
-        "Back Comments";
+        "Back"
+        "Info"
+        "Comments";
+
+
+    @media screen and (min-width: 500px) {
+        grid-template-columns: 150px 1fr;
+        grid-template-areas: "Back Info" "Back Comments";
+    }
 }
 
 .campground-page-info {
@@ -19,8 +26,16 @@
     }
 }
 
+.campground-page-image {
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .campground-page-back {
     grid-area: Back;
+    margin-bottom: 20px;
 }
 
 .campground-page-comments {

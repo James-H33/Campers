@@ -3,10 +3,16 @@
         <img src="" alt="">
     </div>
     <div class="comment-body">
-        <h6>James</h6>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, sit obcaecati. Ipsum natus totam tenetur, mollitia eius dolores fuga illo, vero facilis voluptates minima placeat repellat, eveniet hic commodi iusto.</p>
+        <h6>@Value.Username</h6>
+        <p>@Value.Message </p>
     </div>
     <div class="comment-action">
-        <div>Feb 6</div>
+        <div>@Value.DateCreated </div>
     </div>
 </div>
+
+@code
+{
+    [Parameter]
+    public Campers.Models.Comment Value { get; set; } = new Campers.Models.Comment();
+}
