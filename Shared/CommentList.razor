@@ -1,20 +1,12 @@
-@using Campers.Models
-
 <div class="comments">
     @foreach (var comment in Comments)
     {
-        <Comment />
+        <Comment Value="@comment" />
     }
 </div>
 
 @code
 {
     [Parameter]
-    public List<Comment> Comments { get; set; } = new List<Comment>();
-
-    protected override void OnInitialized() 
-    {
-        Comments.Add(new Comment());
-        Comments.Add(new Comment());
-    }
+    public List<Campers.Models.Comment> Comments { get; set; } = new List<Campers.Models.Comment>();
 }

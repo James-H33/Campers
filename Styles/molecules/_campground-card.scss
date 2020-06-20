@@ -1,10 +1,10 @@
 ﻿.campground-card {
     display: grid;
     width: 100%;
-    max-width: 320px;
 
     .c-card {
         display: grid;
+        grid-row-gap: 10px;
         text-align: center;
     }
 }

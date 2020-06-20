@@ -1,6 +1,9 @@
 ﻿@page "/"
 
 @using Campers.Models
+@using Campers.Services.Interfaces
+
+@inject ICampgroundService CampgroundService
 
 <Jumbotron /> 
 
@@ -12,39 +15,12 @@
 
     protected override void OnInitialized() 
     {
-        campgrounds.Add(
-            new Campground {
-                Image = "http://www.fs.usda.gov/Internet/FSE_MEDIA/stelprdb5259404.jpg",
-                Title = "Devils Nest"
-            }
-        );
+        GetCampgrounds();
+    }
 
-        campgrounds.Add(
-             new Campground {
-                Image = "http://www.fs.usda.gov/Internet/FSE_MEDIA/stelprdb5259404.jpg",
-                Title = "Duncan Valley"
-            }
-        );
-
-        campgrounds.Add(
-             new Campground {
-                Image = "http://www.fs.usda.gov/Internet/FSE_MEDIA/stelprdb5259404.jpg",
-                Title = "Duncan Valley"
-            }
-        );
-
-        campgrounds.Add(
-             new Campground {
-                Image = "http://www.fs.usda.gov/Internet/FSE_MEDIA/stelprdb5259404.jpg",
-                Title = "Duncan Valley"
-            }
-        );
-        
-        campgrounds.Add(
-             new Campground {
-                Image = "http://www.fs.usda.gov/Internet/FSE_MEDIA/stelprdb5259404.jpg",
-                Title = "Duncan Valley"
-            }
-        );
+    private async Task GetCampgrounds() 
+    {
+        campgrounds = await CampgroundService.GetAll();
+        StateHasChanged();
     }
 }

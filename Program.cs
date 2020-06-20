@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Campers.Services;
+using Campers.Services.Interfaces;
 
 namespace Campers
 {
@@ -18,6 +20,9 @@ namespace Campers
             builder.RootComponents.Add<App>("app");
 
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+            builder.Services.AddSingleton<ICampgroundService, CampgroundService>();
+            builder.Services.AddSingleton<ICommentService, CommentService>();
 
             await builder.Build().RunAsync();
         }
