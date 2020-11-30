@@ -8,9 +8,9 @@ namespace Campers.Models
         public int Id { get; set; }
 
         [JsonPropertyName("comment")]
-        public string Message { get; set; }
+        public string Message { get; set; } = "";
 
-        public string Username { get; set; }
+        public string Username { get; set; } = "";
 
         public DateTime DateCreated { get; set; }
     }

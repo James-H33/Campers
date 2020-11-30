@@ -1,0 +1,68 @@
+﻿@page "/login"
+
+@using Campers.Models
+@using Campers.Services.Interfaces
+
+@inject IAuthService AuthService
+@inject IUserProfileService UserProfileService 
+@inject NavigationManager NavigationManager
+@inject IStateService StateService
+
+<div class="login-form .form"> 
+    <h3>Login</h3>
+    <div class="form-input">
+        <label>Username</label>
+        <input 
+            @bind-value="Model.Username" 
+            type="text" 
+            name="username" 
+            placeholder="Username" />
+    </div>
+
+    <div class="form-input">
+        <label>Password</label>
+        <input 
+            @bind-value="Model.Password"
+            type="text"
+            name="password" 
+            placeholder="Password" />
+    </div>
+
+    @if (!String.IsNullOrEmpty(ErrorMessage)) 
+    {
+        <div class="form-error">@ErrorMessage</div>
+    }
+
+    <button @onclick="OnSubmit" class="">Submit</button>
+</div>
+
+@code {
+
+    public LoginRequest Model { get; set; } = new LoginRequest();
+
+    public string ErrorMessage { get; set; }
+
+    public async Task OnSubmit()
+    {
+        ErrorMessage = "";
+
+        try
+        {
+            var response = await AuthService.Login(Model);
+
+            if (!String.IsNullOrEmpty(response.AccessToken))
+            {
+                await StateService.UpdateState();
+                NavigationManager.NavigateTo("/");
+            }
+            else
+            {
+                ErrorMessage = "That didn't work, try again.";
+            }
+        }
+        catch
+        {
+            ErrorMessage = "That didn't work, try again.";
+        }
+    }
+}

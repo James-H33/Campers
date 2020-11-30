@@ -1,18 +1,66 @@
 <div class="comment">
-    <div class="comment-photo">
-        <img src="" alt="">
+    <div class="comment-initials">
+        <div class="comment-initial" style="background: @initialBackgroundColor;">
+            <span>
+                @initials
+            </span>
+        </div>
     </div>
+
     <div class="comment-body">
-        <h6>@Value.Username</h6>
-        <p>@Value.Message </p>
+        <h6 class="comment-user">@Value.Username</h6>
+        <div class="comment-date">@formattedDate </div>
+        <p class="comment-message">@Value.Message </p>
     </div>
-    <div class="comment-action">
-        <div>@Value.DateCreated </div>
-    </div>
+
+    @if (isAuthorized)
+    {
+        <div class="comment-action">
+            <a href="javascript:void()">Edit</a>
+        </div>
+    }
 </div>
 
 @code
 {
     [Parameter]
     public Campers.Models.Comment Value { get; set; } = new Campers.Models.Comment();
+
+    public bool isAuthorized { get; set; } = false;
+
+    public List<string> colors = new List<string> 
+    {
+        "#f7a8a8b8",
+        "#f7cca8b8",
+        "#a9f7a8b8",
+        "#a8f7f0b8",
+        "#a8c4f7b8",
+        "#ada8f7b8",
+        "#d9a8f7b8",
+        "#f7a8e2b8",
+        "#f7a8a8b8"
+    };
+
+    public string initials => !String.IsNullOrWhiteSpace(Value.Username) ? Value.Username.Substring(0, 1) : "N/A";
+
+    public string initialBackgroundColor => GetRandomColor();
+
+    public string formattedDate
+    {
+        get
+        {
+            var date = Value.DateCreated;
+            var day = date.Day;
+            var year = date.Year;
+            var month = date.Month;
+
+            return $"{month}/{day}/{year}";
+        }
+    }
+
+    public string GetRandomColor()
+    {
+        var rand = new Random();
+        return colors[rand.Next(0, colors.Count)];
+    }
 }

@@ -2,9 +2,11 @@
 
 @using Campers.Services.Interfaces
 @using System.Collections.Generic 
+@using Campers.Models
 
 @inject ICampgroundService CampgroundService  
 @inject ICommentService CommentService 
+@inject IUserProfileService UserProfileService 
 
 <div class="campground-page">
     <div class="campground-page-back">
@@ -24,7 +26,26 @@
     <div class="campground-page-comments">
         <Card>
             <h5>Comments</h5>
-            <CommentList Comments="@comments" />    
+
+            <CommentList Comments="@comments" />
+
+            @if (profile.isLoggedIn())
+            {
+                 <div class="create-comment">
+                     <div class="create-comment-input">
+                        <textarea 
+                            type="text" 
+                            @bind-value="NewComment.Comment"
+                            @bind-value:event="oninput"
+                            placeholder="Comment" row="10" col="10">
+                        </textarea> 
+                     </div>
+
+                    <div class="create-comment-cta">
+                        <button @onclick="AddComment">Add Comment</button>
+                    </div>
+                 </div>
+            }
         </Card>
     </div>
 </div>
@@ -38,11 +59,39 @@
 
     public List<Campers.Models.Comment> comments { get; set; } = new List<Campers.Models.Comment>();
 
+    public CommentForCreate NewComment { get; set; } = new CommentForCreate();
+
+    private UserProfile profile = new UserProfile();
+
     protected async override Task OnInitializedAsync()
     {
+        await PopulateUserProfile();
         var campgroundId = int.Parse(Id);
         campground = await CampgroundService.GetById(campgroundId);
         comments = await CommentService.GetComments(campgroundId);
         StateHasChanged();
+    }
+
+    public async void AddComment()
+    {
+        NewComment.UserId = GetUserId();
+        var result = await CommentService.Create(int.Parse(Id), NewComment);
+
+        if (result != null)
+        {
+            comments.Add(result);
+            NewComment = new CommentForCreate();
+            StateHasChanged();
+        }
+    }
+
+    private async Task PopulateUserProfile()
+    {
+        profile = await UserProfileService.GetProfile();
+    }
+
+    private int GetUserId()
+    {
+        return profile.Id;
     }
 }

@@ -1,0 +1,18 @@
+
+.create-comment {
+    display: grid;
+    row-gap: 10px;
+    margin-top: 20px;
+
+    .create-comment-input {
+        textarea {
+            width: 100%;
+            padding: 10px;
+        }
+    }
+
+    .create-comment-cta {
+        display: grid;
+        justify-content: right;
+    }
+}

@@ -1,8 +1,6 @@
 ﻿using Campers.Models;
 using Campers.Services.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -24,5 +22,20 @@ namespace Campers.Services
 
             return comments;
         }
+
+        public async Task<Comment> Create(int id, CommentForCreate comment) 
+        {
+            try
+            {
+                var url = $"https://localhost:6001/api/comments/campground/{id}";
+                var response = await _http.PostAsJsonAsync<CommentForCreate>(url, comment);
+                var result = await response.Content.ReadFromJsonAsync<Comment>();
+
+                return result;
+            } catch
+            {
+                return null;
+            }
+        } 
     }
 }

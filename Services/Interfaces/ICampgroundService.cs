@@ -8,5 +8,6 @@ namespace Campers.Services.Interfaces
     {
         Task<List<Campground>> GetAll();
         Task<Campground> GetById(int id);
+        Task<Campground> CreateCampground(Campground newCampground);
     }
 }

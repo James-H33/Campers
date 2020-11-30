@@ -1,5 +1,15 @@
+@inject NavigationManager NavigationManager
+
 <div class="jumbotron">
     <h1>Welcome To Campgrounds</h1>
     <h6>View our hand picked campgrounds from all over the country!</h6>
-    <button class="secondary">Create Campground</button>
+    <button class="secondary" @onclick="@NavigateTo">Create Campground</button>
 </div>
+
+@code
+{
+    public void NavigateTo()
+    {
+        NavigationManager.NavigateTo($"/create-campground");
+    }
+}
