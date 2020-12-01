@@ -16,6 +16,14 @@ namespace Campers.Services
             _http = http;
         }
 
+        public async Task<Campground> CreateCampground(Campground newCampground)
+        {
+            var response = await _http.PostAsJsonAsync<Campground>("https://localhost:6001/api/campgrounds", newCampground);
+            var createdCampground = await response.Content.ReadFromJsonAsync<Campground>();
+
+            return createdCampground;
+        }
+
         public async Task<List<Campground>> GetAll()
         {
             var campgrounds = await _http.GetFromJsonAsync<List<Campground>>("https://localhost:6001/api/campgrounds");

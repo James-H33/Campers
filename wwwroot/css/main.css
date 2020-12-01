@@ -12,6 +12,26 @@
   .c-card.medium {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
 
+.form .form-input {
+  display: grid;
+  margin-bottom: 1em; }
+  .form .form-input label {
+    margin-bottom: 5px; }
+
+.form .form-error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px; }
+
+input {
+  height: 50px;
+  border-radius: 6px;
+  border: 1px solid #000;
+  padding-left: 10px; }
+  input:focus {
+    outline: none;
+    border: 2px solid #000; }
+
 .nav-menu {
   box-shadow: 0px 1px 4px #e6e9ec; }
   .nav-menu h4 {
@@ -27,7 +47,11 @@
   margin-bottom: 15px; }
 
 .nav-menu-items {
+  display: flex;
   justify-self: end; }
+
+.nav-menu-item {
+  padding: 10px; }
 
 .jumbotron h6 {
   margin-bottom: 20px; }
@@ -60,6 +84,50 @@ footer {
   background: #000;
   color: white; }
 
+.comment {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  grid-template-areas: "Initials Body" "Initials Body"; }
+  .comment .comment-initials {
+    grid-area: Initials;
+    display: grid;
+    justify-items: center; }
+    .comment .comment-initials .comment-initial {
+      display: grid;
+      height: 60px;
+      width: 60px;
+      background: #f5f5;
+      justify-items: center;
+      align-items: center;
+      border-radius: 50%; }
+    .comment .comment-initials img {
+      width: 100%; }
+  .comment .comment-body {
+    padding-left: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "Username Date" "Message Message"; }
+  .comment .comment-user {
+    grid-area: Username; }
+  .comment .comment-message {
+    grid-area: Message; }
+  .comment .comment-date {
+    grid-area: Date;
+    text-align: end; }
+  .comment .comment-action {
+    justify-self: end; }
+
+.create-comment {
+  display: grid;
+  row-gap: 10px;
+  margin-top: 20px; }
+  .create-comment .create-comment-input textarea {
+    width: 100%;
+    padding: 10px; }
+  .create-comment .create-comment-cta {
+    display: grid;
+    justify-content: right; }
+
 .campground-page {
   display: grid;
   grid-template-columns: 1fr;
@@ -89,6 +157,39 @@ footer {
 
 .campground-page-comments {
   grid-area: Comments; }
+  .campground-page-comments .comments {
+    display: grid;
+    grid-row-gap: 1em;
+    padding-top: 2em; }
+  .campground-page-comments .comment {
+    border-bottom: 1px solid #f5f5f5;
+    padding: 15px 0; }
+
+.create-campground-page {
+  max-width: 450px;
+  margin: 0 auto; }
+  .create-campground-page h3 {
+    margin-bottom: 1em; }
+  .create-campground-page button {
+    margin-top: 1em; }
+
+.login-form {
+  display: grid;
+  max-width: 350px;
+  margin: 0 auto; }
+  .login-form h3 {
+    margin-bottom: 1em; }
+  .login-form .form-input {
+    display: grid;
+    margin-bottom: 1em; }
+  .login-form .form-error {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px; }
+
+* {
+  margin: 0;
+  padding: 0; }
 
 .content {
   max-width: 1200px;

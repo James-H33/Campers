@@ -17,5 +17,10 @@
 }
 
 .nav-menu-items {
+    display: flex;
     justify-self: end;
+}
+
+.nav-menu-item {
+    padding: 10px;
 }

@@ -1,4 +1,14 @@
+@using Microsoft.AspNetCore.Authorization
+@using Campers.Models
+@using Campers.Security
+@using Campers.Services.Interfaces
+
+
 @inject NavigationManager Url
+@inject IUserProfileService UserProfileService
+@inject IAuthService AuthService
+@inject IStateService StateService
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <div class="nav-menu">
     <div class="nav-menu-content">
@@ -7,25 +17,61 @@
         </h4>
 
         <div class="nav-menu-items">
-            @if (isLoggedIn) 
+            @if (isLoggedIn)
             {
-                <div>UserName Here</div>
-                <AnchorTag HasLink="false">Logout</AnchorTag>
-            } 
-            else 
+                <div class="nav-menu-item">
+                    <div>@profile.Username</div>
+                </div>
+
+                <div class="nav-menu-item">
+                    <AnchorTag OnClick="@Logout" HasLink="false">Logout</AnchorTag>
+                </div>
+            }
+            else
             {
-                <AnchorTag LinkUrl="/login">Login</AnchorTag>
+                <div class="nav-menu-item">
+                    <AnchorTag LinkUrl="/login">Login</AnchorTag>
+                </div>
             }
         </div>
     </div>
 </div>
 
-@code 
+@code
 {
     public bool isLoggedIn = false;
 
-    public void Navigate() 
+    public UserProfile profile = new UserProfile();
+
+    protected async override Task OnInitializedAsync()
     {
+        StateService.WatchStateChange(StateChanged);
+
+        await UpdateIsLoggedIn();
+    }
+
+    public void StateChanged(ApplicationState state)
+    {
+        UpdateIsLoggedIn();
+    }
+
+    public async Task UpdateIsLoggedIn()
+    {
+        profile = await UserProfileService.GetProfile();
+        isLoggedIn = profile.isLoggedIn();
+        StateHasChanged();
+    }
+
+    public void Navigate()
+    {
+        Url.NavigateTo("/");
+    }
+
+    public async Task Logout()
+    {
+        await AuthService.Logout();
+        await StateService.UpdateState();
+        ((CampersAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsUnAuthenticated();
         Url.NavigateTo("/");
     }
 }

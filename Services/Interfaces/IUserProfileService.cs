@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Campers.Services.Interfaces
 {
-    interface ICommentService
+    interface IUserProfileService
     {
-        Task<List<Comment>> GetComments(int id);
-        Task<Comment> Create(int id, CommentForCreate comment);
+        Task<UserProfile> GetProfile();
     }
 }

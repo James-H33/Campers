@@ -13,9 +13,9 @@
 {
     public List<Campground> campgrounds { get; set; } = new List<Campground>();
 
-    protected override void OnInitialized() 
+    protected async override Task OnInitializedAsync()
     {
-        GetCampgrounds();
+        await GetCampgrounds();
     }
 
     private async Task GetCampgrounds() 

@@ -3,6 +3,11 @@
 @import './molecules/_molecules.scss';
 @import './pages/_pages.scss';
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
 .content {
     max-width: 1200px;
     padding-top: 20px;
