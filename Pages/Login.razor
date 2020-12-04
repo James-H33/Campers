@@ -54,7 +54,17 @@
             {
                 await StateService.UpdateState();
                 ((CampersAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated();
-                NavigationManager.NavigateTo("/");
+
+                var redirectUrl = GetRedirectUrl();
+
+                if (redirectUrl != null)
+                {
+                    NavigationManager.NavigateTo(redirectUrl);
+                }
+                else
+                {
+                    NavigationManager.NavigateTo("/");
+                }
             }
             else
             {
@@ -64,6 +74,32 @@
         catch
         {
             ErrorMessage = "That didn't work, try again.";
+        }
+    }
+
+    private string GetRedirectUrl()
+    {
+        try
+        {
+            var queryString = NavigationManager.Uri.Contains("?")
+               ? NavigationManager.Uri.Split("?").ToList()[1]
+               : "";
+
+            if (!String.IsNullOrEmpty(queryString) && queryString.Contains("returnUrl"))
+            {
+                var url = queryString.Split("returnUrl=").ToList()[1];
+
+                if (!String.IsNullOrEmpty(url))
+                {
+                    return url;
+                }
+            }
+
+            return null;
+        }
+        catch
+        {
+            return null;
         }
     }
 }
