@@ -35,8 +35,6 @@ namespace Campers
                 var ups = serviceProvider.GetRequiredService<IUserProfileService>();
                 return new CampersAuthenticationStateProvider((UserProfileService)ups);
             });
-            //builder.Services.AddScoped<CampersAuthenticationStateProvider, CampersAuthenticationStateProvider>();
-
 
             await builder.Build().RunAsync();
         }

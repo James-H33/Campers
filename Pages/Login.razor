@@ -2,33 +2,33 @@
 
 @using Campers.Models
 @using Campers.Services.Interfaces
+@using Campers.Security 
 
 @inject IAuthService AuthService
-@inject IUserProfileService UserProfileService 
+@inject IUserProfileService UserProfileService
 @inject NavigationManager NavigationManager
 @inject IStateService StateService
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
-<div class="login-form .form"> 
+<div class="login-form .form">
     <h3>Login</h3>
     <div class="form-input">
         <label>Username</label>
-        <input 
-            @bind-value="Model.Username" 
-            type="text" 
-            name="username" 
-            placeholder="Username" />
+        <input @bind-value="Model.Username"
+               type="text"
+               name="username"
+               placeholder="Username" />
     </div>
 
     <div class="form-input">
         <label>Password</label>
-        <input 
-            @bind-value="Model.Password"
-            type="text"
-            name="password" 
-            placeholder="Password" />
+        <input @bind-value="Model.Password"
+               type="text"
+               name="password"
+               placeholder="Password" />
     </div>
 
-    @if (!String.IsNullOrEmpty(ErrorMessage)) 
+    @if (!String.IsNullOrEmpty(ErrorMessage))
     {
         <div class="form-error">@ErrorMessage</div>
     }
@@ -53,7 +53,18 @@
             if (!String.IsNullOrEmpty(response.AccessToken))
             {
                 await StateService.UpdateState();
-                NavigationManager.NavigateTo("/");
+                ((CampersAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated();
+
+                var redirectUrl = GetRedirectUrl();
+
+                if (redirectUrl != null)
+                {
+                    NavigationManager.NavigateTo(redirectUrl);
+                }
+                else
+                {
+                    NavigationManager.NavigateTo("/");
+                }
             }
             else
             {
@@ -63,6 +74,32 @@
         catch
         {
             ErrorMessage = "That didn't work, try again.";
+        }
+    }
+
+    private string GetRedirectUrl()
+    {
+        try
+        {
+            var queryString = NavigationManager.Uri.Contains("?")
+               ? NavigationManager.Uri.Split("?").ToList()[1]
+               : "";
+
+            if (!String.IsNullOrEmpty(queryString) && queryString.Contains("returnUrl"))
+            {
+                var url = queryString.Split("returnUrl=").ToList()[1];
+
+                if (!String.IsNullOrEmpty(url))
+                {
+                    return url;
+                }
+            }
+
+            return null;
+        }
+        catch
+        {
+            return null;
         }
     }
 }
