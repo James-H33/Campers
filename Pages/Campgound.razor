@@ -42,7 +42,7 @@
                      </div>
 
                     <div class="create-comment-cta">
-                        <button @onclick="AddComment">Add Comment</button>
+                        <button disabled=@commentReadyForSave @onclick="AddComment">Add Comment</button>
                     </div>
                  </div>
             }
@@ -60,6 +60,8 @@
     public List<Campers.Models.Comment> comments { get; set; } = new List<Campers.Models.Comment>();
 
     public CommentForCreate NewComment { get; set; } = new CommentForCreate();
+
+    public bool commentReadyForSave => NewComment.Comment.Length < 3;
 
     private UserProfile profile = new UserProfile();
 
