@@ -1,17 +1,35 @@
 ﻿.campground-card {
     display: grid;
     width: 100%;
+    border-radius: 10px;
+    transition: transform 300ms ease;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.025);
+    }
 
     .c-card {
         display: grid;
-        grid-row-gap: 10px;
-        text-align: center;
+        text-align: left;
+        padding: 0;
+    }
+
+    label {
+        font-weight: 500;
+    }
+
+    .campground-card-content {
+        padding: 15px;
+    }
+
+    .campground-card-image {
+        height: 250px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
     }
 }
 
-.campground-card-image {
-    height: 200px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
