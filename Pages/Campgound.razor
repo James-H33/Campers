@@ -27,7 +27,15 @@
         <Card>
             <h5>Comments</h5>
 
-            <CommentList Comments="@comments" />
+            @if (comments.Count > 0) 
+            {
+                <CommentList Comments="@comments" />
+            } 
+
+            @if (comments.Count == 0) 
+            {
+                <span>No comments yet.</span>
+            } 
 
             @if (profile.isLoggedIn())
             {

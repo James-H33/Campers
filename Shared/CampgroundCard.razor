@@ -2,15 +2,16 @@
 @using Campers.Models
 @inject NavigationManager NavigationManager
 
-<div class="campground-card">
+<div class="campground-card" @onclick="@MoreInfo">
     <Card>
         <div 
             class="campground-card-image" 
             style="background-image:url(@Item.Image)">
         </div>
         
-        <label>@Item.Title</label>
-        <button @onclick="@MoreInfo">More Info</button>
+        <div class="campground-card-content">
+            <label>@Item.Title</label>
+        </div>
     </Card>
 </div>
 
