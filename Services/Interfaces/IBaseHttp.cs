@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Campers.Services.Interfaces
