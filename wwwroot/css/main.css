@@ -145,6 +145,8 @@ footer {
   text-align: center;
   background: #000;
   color: white;
+  position: -webkit-sticky;
+  position: sticky;
 }
 
 .comment {
@@ -304,8 +306,15 @@ footer {
 }
 
 .create-campground-page {
-  max-width: 450px;
+  max-width: 400px;
   margin: 0 auto;
+  margin-top: 60px;
+}
+
+@media screen and (min-width: 769px) {
+  .create-campground-page {
+    margin-top: 80px;
+  }
 }
 
 .create-campground-page h3 {
@@ -313,6 +322,7 @@ footer {
 }
 
 .create-campground-page button {
+  width: 100%;
   margin-top: 1em;
 }
 
@@ -320,7 +330,8 @@ footer {
   display: -ms-grid;
   display: grid;
   max-width: 350px;
-  margin: 0 auto;
+  margin: 100px auto;
+  margin-bottom: 10em;
 }
 
 .login-form h3 {
@@ -344,7 +355,16 @@ footer {
   padding: 0;
 }
 
+.main {
+  min-height: calc(100vh - 90px);
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr auto;
+      grid-template-rows: 1fr auto;
+}
+
 .content {
+  width: 100%;
   max-width: 1200px;
   padding-top: 20px;
   margin: 0 auto;

@@ -1,14 +1,21 @@
-﻿@import './vars/_vars.scss';
-@import './atoms/_atoms.scss';
-@import './molecules/_molecules.scss';
-@import './pages/_pages.scss';
+﻿@import './vars/index';
+@import './atoms/_atoms';
+@import './molecules/_molecules';
+@import './pages/_pages';
 
 * {
     margin: 0;
     padding: 0;
 }
 
+.main {
+    min-height: calc(100vh - 90px);
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
 .content {
+    width: 100%;
     max-width: 1200px;
     padding-top: 20px;
     margin: 0 auto;
