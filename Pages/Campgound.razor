@@ -1,12 +1,12 @@
 @page "/campground/{Id}"
 
 @using Campers.Services.Interfaces
-@using System.Collections.Generic 
+@using System.Collections.Generic
 @using Campers.Models
 
-@inject ICampgroundService CampgroundService  
-@inject ICommentService CommentService 
-@inject IUserProfileService UserProfileService 
+@inject ICampgroundService CampgroundService
+@inject ICommentService CommentService
+@inject IUserProfileService UserProfileService
 
 <div class="campground-page">
     <div class="campground-page-back">
@@ -20,33 +20,33 @@
                 <h5>@campground.Title</h5>
                 <p>@campground.Description</p>
             </div>
-        </Card> 
+        </Card>
     </div>
 
     <div class="campground-page-comments">
         <Card>
             <h5>Comments</h5>
 
-            @if (comments.Count > 0) 
+            @if (comments.Count > 0)
             {
                 <CommentList Comments="@comments" />
-            } 
+            }
 
-            @if (comments.Count == 0) 
+            @if (comments.Count == 0)
             {
                 <span>No comments yet.</span>
-            } 
+            }
 
             @if (profile.isLoggedIn())
             {
                  <div class="create-comment">
                      <div class="create-comment-input">
-                        <textarea 
-                            type="text" 
+                        <textarea
+                            type="text"
                             @bind-value="NewComment.Comment"
                             @bind-value:event="oninput"
                             placeholder="Comment" row="10" col="10">
-                        </textarea> 
+                        </textarea>
                      </div>
 
                     <div class="create-comment-cta">
@@ -58,7 +58,7 @@
     </div>
 </div>
 
-@code 
+@code
 {
     [Parameter]
     public string Id { get; set; }
@@ -75,33 +75,33 @@
 
     protected async override Task OnInitializedAsync()
     {
-        await PopulateUserProfile();
-        var campgroundId = int.Parse(Id);
-        campground = await CampgroundService.GetById(campgroundId);
-        comments = await CommentService.GetComments(campgroundId);
-        StateHasChanged();
+      await PopulateUserProfile();
+      var campgroundId = int.Parse(Id);
+      campground = await CampgroundService.GetById(campgroundId);
+      comments = await CommentService.GetComments(campgroundId);
+      StateHasChanged();
     }
 
     public async void AddComment()
     {
-        NewComment.UserId = GetUserId();
-        var result = await CommentService.Create(int.Parse(Id), NewComment);
+      NewComment.UserId = GetUserId();
+      var result = await CommentService.Create(int.Parse(Id), NewComment);
 
-        if (result != null)
-        {
-            comments.Add(result);
-            NewComment = new CommentForCreate();
-            StateHasChanged();
-        }
+      if (result != null)
+      {
+        comments.Add(result);
+        NewComment = new CommentForCreate();
+        StateHasChanged();
+      }
     }
 
     private async Task PopulateUserProfile()
     {
-        profile = await UserProfileService.GetProfile();
+      profile = await UserProfileService.GetProfile();
     }
 
     private int GetUserId()
     {
-        return profile.Id;
+      return profile.Id;
     }
 }

@@ -1,0 +1,64 @@
+@page "/signup"
+
+@using Campers.Models
+@using Campers.Services.Interfaces
+@using System.Net
+
+@inject NavigationManager Nav
+@inject ISignupService SignupService
+
+<div class="signup-form .form">
+  <h3>Signup</h3>
+  <div class="form-input">
+    <label>Username</label>
+    <input @bind-value="Model.Username" type="text" name="username" placeholder="Username" />
+  </div>
+
+  <div class="form-input">
+    <label>Password</label>
+    <input @bind-value="Model.Password" type="text" name="password" placeholder="Password" />
+  </div>
+
+  @if (!String.IsNullOrEmpty(ErrorMessage))
+  {
+    <div class="form-error">@ErrorMessage</div>
+  }
+
+  <button @onclick="OnSubmit" class="">Submit</button>
+</div>
+
+
+@code
+{
+  public SignupRequest Model { get; set; } = new SignupRequest();
+
+  public string ErrorMessage { get; set; }
+
+  public async Task OnSubmit()
+  {
+    ErrorMessage = "";
+
+    try
+    {
+      var res = await SignupService.Signup(Model);
+        Console.WriteLine("Success!");
+
+      if (res.Response.StatusCode == HttpStatusCode.OK)
+      {
+        Console.WriteLine("Success"); // Add Toast :)
+        Nav.NavigateTo("/login");
+      }
+      else
+      {
+        var content = Json.Deserialize<ApiResponse>(res.Content);
+        ErrorMessage = content.Message;
+      }
+    }
+    catch
+    {
+      ErrorMessage = "Something went wrong. Try again later.";
+    }
+
+    StateHasChanged();
+  }
+}

@@ -2,9 +2,9 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
+using Campers.Models;
 using Campers.Services.Interfaces;
 
 namespace Campers.Services
@@ -21,31 +21,49 @@ namespace Campers.Services
       _storage = storage;
     }
 
-    public async Task<string> Get(string path)
+    public async Task<HttpResponse> Get(string path)
     {
       var token = await GetAuthToken();
       _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
       var response = await _http.GetAsync(new Uri($"{servicesUrl}{path}"));
-      return await response.Content.ReadAsStringAsync();
+      var content = await response.Content.ReadAsStringAsync();
+
+      return new HttpResponse
+      {
+        Content = content,
+        Response = response
+      };
     }
 
-    public async Task<string> Post<T>(string path, T data)
+    public async Task<HttpResponse> Post<T>(string path, T data)
     {
       var token = await GetAuthToken();
       _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
       var response = await _http.PostAsJsonAsync(new Uri($"{servicesUrl}{path}"), data);
-      return await response.Content.ReadAsStringAsync();
+      var content = await response.Content.ReadAsStringAsync();
+
+      return new HttpResponse
+      {
+        Content = content,
+        Response = response
+      };
     }
 
-    public async Task<string> Delete(string path)
+    public async Task<HttpResponse> Delete(string path)
     {
       var token = await GetAuthToken();
       _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
       var response = await _http.DeleteAsync(new Uri($"{servicesUrl}{path}"));
-      return await response.Content.ReadAsStringAsync();
+      var content = await response.Content.ReadAsStringAsync();
+
+      return new HttpResponse
+      {
+        Content = content,
+        Response = response
+      };
     }
 
     private async Task<string> GetAuthToken()

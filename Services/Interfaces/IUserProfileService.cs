@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Campers.Services.Interfaces
 {
-    interface IUserProfileService
-    {
-        Task<UserProfile> GetProfile();
-    }
+  interface IUserProfileService
+  {
+    Task<UserProfile> GetProfile();
+  }
 }

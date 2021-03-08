@@ -1,11 +1,16 @@
 ﻿button {
-    color: #fff;
-    background: black;
-    padding: 10px 25px;
-    border-radius: 6px;
-    border: none;
+  color: #fff;
+  background: black;
+  padding: 10px 25px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
 
-    &:disabled {
-        background: gray;
-    }
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    background: gray;
+  }
 }

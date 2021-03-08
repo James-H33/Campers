@@ -30,7 +30,8 @@ namespace Campers
             builder.Services.AddScoped<IStateService, StateService>();
             builder.Services.AddScoped<IUserProfileService, UserProfileService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
-            builder.Services.AddScoped<AuthenticationStateProvider>(serviceProvider => 
+            builder.Services.AddScoped<ISignupService, SignupService>();
+            builder.Services.AddScoped<AuthenticationStateProvider>(serviceProvider =>
             {
                 var ups = serviceProvider.GetRequiredService<IUserProfileService>();
                 return new CampersAuthenticationStateProvider((UserProfileService)ups);
