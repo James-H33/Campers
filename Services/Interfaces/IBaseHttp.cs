@@ -1,12 +1,12 @@
-using System.Text.Json;
 using System.Threading.Tasks;
+using Campers.Models;
 
 namespace Campers.Services.Interfaces
 {
   public interface IBaseHttp
   {
-    Task<string> Get(string path);
-    Task<string> Post<T>(string path, T data);
-    Task<string> Delete(string path);
+    Task<HttpResponse> Get(string path);
+    Task<HttpResponse> Post<T>(string path, T data);
+    Task<HttpResponse> Delete(string path);
   }
 }

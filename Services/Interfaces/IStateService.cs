@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Campers.Services.Interfaces
 {
-    interface IStateService
-    {
-        public Task <ApplicationState> GetState();
-        public Task UpdateState();
-        public Task UpdateState(string key, dynamic value);
-        public void WatchStateChange(Action<ApplicationState> callback);
-    }
+  interface IStateService
+  {
+    Task <ApplicationState> GetState();
+    Task UpdateState();
+    Task UpdateState(string key, dynamic value);
+    void WatchStateChange(Action<ApplicationState> callback);
+  }
 }
