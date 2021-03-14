@@ -4,46 +4,99 @@
 @using Campers.Services.Interfaces
 @using Microsoft.AspNetCore.Authorization
 
-@attribute [Authorize] 
+@attribute [Authorize]
 
+@inject IJSRuntime JS;
 @inject ICampgroundService CampgroundService
 @inject NavigationManager NavigationManager
-@inject IUserProfileService UserProfileService  
+@inject IUserProfileService UserProfileService
 
 <div class="create-campground-page">
-    <h3>Create Campground</h3>
+  <h3>Create Campground</h3>
 
-    <EditForm class="form" Model="@campground" OnValidSubmit="@HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+  <EditForm class="form" Model="@campground" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
-        <div class="form-input">
-            <label>Title</label>
-            <InputText @bind-Value="campground.Title" placeholder="Title" />
-        </div>
+    <div class="form-input">
+      <label>Title</label>
+      <InputText @bind-Value="campground.Title" placeholder="Title" />
+    </div>
+    <div class="form-input">
+      <label>Description</label>
+      <InputText @bind-Value="campground.Description" placeholder="Description" />
+    </div>
 
-        <div class="form-input">
-            <label>Description</label>
-            <InputText @bind-Value="campground.Description" placeholder="Description" />
-        </div>
+    <div class="form-input">
+      <label>Image Url</label>
+      <div class="create-campground-image-input">
+        <InputText
+          @bind-Value="imageUrl"
+          placeholder="Image Url" />
+        <button @onclick="InitializeCropperWithUrl">Update</button>
+      </div>
+    </div>
 
-        <div class="form-input">
-            <label>Image Url</label>
-            <InputText @bind-Value="campground.Image" placeholder="Image Url" />
-        </div>
+    @if (!String.IsNullOrEmpty(campground.Image))
+    {
+      <img class="campground-image" src="@campground.Image" />
+    }
 
-        <button type="submit">Submit</button>
-    </EditForm>
+    <div id="image-crop"></div>
+
+    @if (String.IsNullOrEmpty(campground.Image) && isCropping)
+    {
+      <button @onclick="CropImage">Crop Image</button>
+    }
+
+    <button type="submit">Submit</button>
+  </EditForm>
 </div>
 
 @code {
     public Campground campground { get; set; } = new Campground();
 
+    public string _imageUrl { get; set; } = "";
+
+    public bool isCropping { get; set; } = false;
+
+    public string imageUrl {
+      get => _imageUrl;
+      set
+      {
+        _imageUrl = value;
+      }
+    }
+
+    public void InitializeImageCropper()
+    {
+      JS.InvokeVoidAsync("InitCropper", imageUrl);
+    }
+
+    public async Task CropImage()
+    {
+      var result = await JS.InvokeAsync<string>("Cropper.GetFinalResult");
+      _imageUrl = "";
+      isCropping = false;
+      campground.Image = result;
+    }
+
+    public void InitializeCropperWithUrl()
+    {
+
+      if (!String.IsNullOrEmpty(imageUrl))
+      {
+        campground.Image = "";
+        isCropping = true;
+        InitializeImageCropper();
+      }
+    }
+
     private async Task HandleValidSubmit()
     {
-        var profile = await UserProfileService.GetProfile();
-        campground.UserId = profile.Id;
-        var result = await CampgroundService.CreateCampground(campground);
-        NavigationManager.NavigateTo($"/campground/{result.Id}");
+      var profile = await UserProfileService.GetProfile();
+      campground.UserId = profile.Id;
+      var result = await CampgroundService.CreateCampground(campground);
+      NavigationManager.NavigateTo($"/campground/{result.Id}");
     }
 }
