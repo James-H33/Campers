@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Campers.Models;
@@ -28,6 +29,13 @@ namespace Campers.Services
       var campgrounds = Json.Deserialize<List<Campground>>(res.Content);
 
       return campgrounds;
+    }
+
+    public async Task<PagedResult<Campground>> Get(PagedQuery query)
+    {
+      var queryStr = query.AsString();
+      var res = await _http.Get($"/api/campgrounds{queryStr}");
+      return Json.Deserialize<PagedResult<Campground>>(res.Content);
     }
 
     public async Task<Campground> GetById(int id)

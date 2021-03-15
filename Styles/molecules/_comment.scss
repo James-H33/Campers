@@ -1,49 +1,49 @@
 ﻿.comment {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  grid-template-areas: "Initials Body" "Initials Body";
+
+  .comment-initials {
+    grid-area: Initials;
     display: grid;
-    grid-template-columns: 100px 1fr;
-    grid-template-areas: "Initials Body" "Initials Body";
+    justify-items: center;
 
-    .comment-initials {
-        grid-area: Initials;
-        display: grid;
-        justify-items: center;
-
-        .comment-initial {
-            display: grid;
-            height: 60px;
-            width: 60px;
-            background: #f5f5;
-            justify-items: center;
-            align-items: center;
-            border-radius: 50%;
-        }
-
-        img {
-            width: 100%;
-        }
+    .comment-initial {
+      display: grid;
+      height: 60px;
+      width: 60px;
+      background: #f5f5;
+      justify-items: center;
+      align-items: center;
+      border-radius: 50%;
     }
 
-    .comment-body {
-        padding-left: 20px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas: "Username Date" "Message Message";
+    img {
+      width: 100%;
     }
+  }
 
-    .comment-user {
-        grid-area: Username;
-    }
+  .comment-body {
+    padding-left: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "Username Date" "Message Message";
+  }
 
-    .comment-message {
-        grid-area: Message;
-    }
+  .comment-user {
+    grid-area: Username;
+  }
 
-    .comment-date {
-        grid-area: Date;
-        text-align: end;
-    }
+  .comment-message {
+    grid-area: Message;
+  }
 
-    .comment-action {
-        justify-self: end;
-    }
+  .comment-date {
+    grid-area: Date;
+    text-align: end;
+  }
+
+  .comment-action {
+    justify-self: end;
+  }
 }

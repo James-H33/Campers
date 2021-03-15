@@ -9,53 +9,52 @@
 @inject IUserProfileService UserProfileService
 
 <div class="campground-page">
-    <div class="campground-page-back">
-        <NavLink href="/">Back</NavLink>
-    </div>
-    <div class="campground-page-info">
-        <Card>
-            <!-- <div class="campground-page-image" style="background-image:url(@campground.Image)"></div> -->
-            <img src="@campground.Image">
-            <div class="campground-page-info-description">
-                <h5>@campground.Title</h5>
-                <p>@campground.Description</p>
-            </div>
-        </Card>
-    </div>
+  <div class="campground-page-back">
+      <NavLink href="/">Back</NavLink>
+  </div>
+  <div class="campground-page-info">
+    <Card>
+      <img src="@campground.Image">
+      <div class="campground-page-info-description">
+        <h4>@campground.Title</h4>
+        <p>@campground.Description</p>
+      </div>
+    </Card>
+  </div>
 
-    <div class="campground-page-comments">
-        <Card>
-            <h5>Comments</h5>
+  <div class="campground-page-comments">
+    <Card>
+      <h6>Comments</h6>
 
-            @if (comments.Count > 0)
-            {
-                <CommentList Comments="@comments" />
-            }
+      @if (comments.Count > 0)
+      {
+        <CommentList Comments="@comments" />
+      }
 
-            @if (comments.Count == 0)
-            {
-                <span>No comments yet.</span>
-            }
+      @if (comments.Count == 0)
+      {
+        <span>No comments yet.</span>
+      }
 
-            @if (profile.isLoggedIn())
-            {
-                 <div class="create-comment">
-                     <div class="create-comment-input">
-                        <textarea
-                            type="text"
-                            @bind-value="NewComment.Comment"
-                            @bind-value:event="oninput"
-                            placeholder="Comment" row="10" col="10">
-                        </textarea>
-                     </div>
+      @if (profile.isLoggedIn())
+      {
+        <div class="create-comment">
+          <div class="create-comment-input">
+            <textarea
+              type="text"
+              @bind-value="NewComment.Comment"
+              @bind-value:event="oninput"
+              placeholder="Comment" row="10" col="10">
+            </textarea>
+          </div>
 
-                    <div class="create-comment-cta">
-                        <button disabled=@commentReadyForSave @onclick="AddComment">Add Comment</button>
-                    </div>
-                 </div>
-            }
-        </Card>
-    </div>
+          <div class="create-comment-cta">
+            <button disabled=@commentReadyForSave @onclick="AddComment">Add Comment</button>
+          </div>
+        </div>
+      }
+    </Card>
+  </div>
 </div>
 
 @code

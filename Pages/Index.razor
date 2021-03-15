@@ -5,22 +5,43 @@
 
 @inject ICampgroundService CampgroundService
 
-<Jumbotron /> 
+<Jumbotron />
 
 <CampgroundList Campgrounds="@campgrounds" />
 
-@code 
+<Paging
+    Count="@totalCount"
+    Page="@currentPage"
+    ItemsPerPage="@itemsPerPage"
+    PageChange="@HandlePageChange" />
+
+@code
 {
-    public List<Campground> campgrounds { get; set; } = new List<Campground>();
+  public List<Campground> campgrounds { get; set; } = new List<Campground>();
+  public int totalCount { get; set; } = 0;
+  public int currentPage { get; set; } = 1;
+  public int itemsPerPage { get; set; } = 8;
 
-    protected async override Task OnInitializedAsync()
-    {
-        await GetCampgrounds();
-    }
+  protected async override Task OnInitializedAsync()
+  {
+    await GetCampgrounds();
+  }
 
-    private async Task GetCampgrounds() 
-    {
-        campgrounds = await CampgroundService.GetAll();
-        StateHasChanged();
-    }
+  public void HandlePageChange(int page)
+  {
+    currentPage = page;
+    GetCampgrounds();
+  }
+
+  private async Task GetCampgrounds()
+  {
+    var query = new PagedQuery();
+    query.Skip = (currentPage - 1) * itemsPerPage;
+    query.Take = itemsPerPage;
+
+    var response = await CampgroundService.Get(query);
+    campgrounds = response.Results;
+    totalCount = response.Count;
+    StateHasChanged();
+  }
 }
