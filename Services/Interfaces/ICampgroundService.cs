@@ -7,6 +7,7 @@ namespace Campers.Services.Interfaces
   public interface ICampgroundService
   {
     Task<List<Campground>> GetAll();
+    Task<PagedResult<Campground>> Get(PagedQuery query);
     Task<Campground> GetById(int id);
     Task<Campground> CreateCampground(Campground newCampground);
   }

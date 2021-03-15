@@ -2,14 +2,14 @@
 @using Campers.Models
 
 <div class="campground-list">
-    @foreach (var item in Campgrounds)
-    {
-        <CampgroundCard Item="@item" />
-    }
+  @foreach (var item in Campgrounds)
+  {
+    <CampgroundCard Item="@item" />
+  }
 </div>
 
-@code 
+@code
 {
-    [Parameter]
-    public List<Campground> Campgrounds { get; set; } = new List<Campground>();
+  [Parameter]
+  public List<Campground> Campgrounds { get; set; } = new List<Campground>();
 }

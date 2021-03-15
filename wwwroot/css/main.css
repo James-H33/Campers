@@ -234,6 +234,7 @@ footer {
 .create-comment .create-comment-input textarea {
   width: 100%;
   padding: 10px;
+  border: 1px solid #cbcbcb;
 }
 
 .create-comment .create-comment-cta {
@@ -242,6 +243,35 @@ footer {
   -webkit-box-pack: right;
       -ms-flex-pack: right;
           justify-content: right;
+}
+
+.pager {
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+  margin-top: 1em;
+}
+
+.pager-pages {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (auto)[5];
+      grid-template-columns: repeat(5, auto);
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.pager-page {
+  text-align: center;
+  border: 1px solid #e5e5e5;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+.pager-page.active {
+  color: #fff;
+  border: none;
+  background: black;
 }
 
 .campground-page {
@@ -267,8 +297,31 @@ footer {
   margin-bottom: 30px;
 }
 
+.campground-page-info .c-card {
+  padding: 0;
+}
+
+.campground-page-info p {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 500px) {
+  .campground-page-info p {
+    margin-bottom: 10px;
+  }
+}
+
+.campground-page-info img {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
 .campground-page-info .campground-page-info-description {
-  margin-top: 20px;
+  margin-top: 10px;
+  padding: 10px;
 }
 
 .campground-page-info img {
