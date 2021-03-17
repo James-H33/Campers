@@ -17,5 +17,8 @@ namespace Campers.Models
 
     [Required]
     public string Image { get; set; }
+
+    [Required]
+    public string Thumbnail { get; set; }
   }
 }

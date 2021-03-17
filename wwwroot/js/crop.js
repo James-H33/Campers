@@ -16,12 +16,35 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       window.Cropper.GetFinalResult = () => {
-        return new Promise((resolve) => {
-          window.Cropper.result({ type: 'base64', size: { width: 800, height: 600 } }).then((blob) => {
-            window.Cropper.destroy();
-            window.Cropper = null;
-            resolve(blob);
+        const result = {
+          Image: '',
+          Thumbnail: ''
+        };
+
+        const HighRes = () => {
+          return new Promise(resolve => {
+            window.Cropper.result({ type: 'base64', size: { width: 500, height: 400 } }).then((blob) => {
+              resolve(blob);
+            });
           });
+        }
+
+        const Thumbnail = () => {
+          return new Promise(resolve => {
+            window.Cropper.result({ type: 'base64', size: { width: 300, height: 200 } }).then((blob) => {
+              resolve(blob);
+            });
+          });
+        }
+
+        return new Promise(async (resolve) => {
+          const [image, thumbnail] = await Promise.all([HighRes(), Thumbnail()]);
+          result.Image = image;
+          result.Thumbnail = thumbnail;
+          debugger;
+          window.Cropper.destroy();
+          window.Cropper = null;
+          resolve(result);
         });
       }
 

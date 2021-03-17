@@ -75,10 +75,11 @@
 
     public async Task CropImage()
     {
-      var result = await JS.InvokeAsync<string>("Cropper.GetFinalResult");
+      var result = await JS.InvokeAsync<CropperResult>("Cropper.GetFinalResult");
       _imageUrl = "";
       isCropping = false;
-      campground.Image = result;
+      campground.Image = result.Image;
+      campground.Thumbnail = result.Thumbnail;
     }
 
     public void InitializeCropperWithUrl()
