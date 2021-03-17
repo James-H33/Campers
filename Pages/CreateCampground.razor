@@ -31,23 +31,11 @@
       <label>Image Url</label>
       <div class="create-campground-image-input">
         <InputText
-          @bind-Value="imageUrl"
+          @bind-Value="campground.Image"
           placeholder="Image Url" />
-        <button @onclick="InitializeCropperWithUrl">Update</button>
       </div>
     </div>
 
-    @if (!String.IsNullOrEmpty(campground.Image))
-    {
-      <img class="campground-image" src="@campground.Image" />
-    }
-
-    <div id="image-crop"></div>
-
-    @if (String.IsNullOrEmpty(campground.Image) && isCropping)
-    {
-      <button @onclick="CropImage">Crop Image</button>
-    }
 
     <button type="submit">Submit</button>
   </EditForm>
@@ -55,42 +43,6 @@
 
 @code {
     public Campground campground { get; set; } = new Campground();
-
-    public string _imageUrl { get; set; } = "";
-
-    public bool isCropping { get; set; } = false;
-
-    public string imageUrl {
-      get => _imageUrl;
-      set
-      {
-        _imageUrl = value;
-      }
-    }
-
-    public void InitializeImageCropper()
-    {
-      JS.InvokeVoidAsync("InitCropper", imageUrl);
-    }
-
-    public async Task CropImage()
-    {
-      var result = await JS.InvokeAsync<string>("Cropper.GetFinalResult");
-      _imageUrl = "";
-      isCropping = false;
-      campground.Image = result;
-    }
-
-    public void InitializeCropperWithUrl()
-    {
-
-      if (!String.IsNullOrEmpty(imageUrl))
-      {
-        campground.Image = "";
-        isCropping = true;
-        InitializeImageCropper();
-      }
-    }
 
     private async Task HandleValidSubmit()
     {
