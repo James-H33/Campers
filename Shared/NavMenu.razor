@@ -68,7 +68,7 @@
 
     public void Navigate()
     {
-        Url.NavigateTo("/");
+        Url.NavigateTo("");
     }
 
     public async Task Logout()
@@ -76,6 +76,6 @@
         await AuthService.Logout();
         await StateService.UpdateState();
         ((CampersAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsUnAuthenticated();
-        Url.NavigateTo("/");
+        Url.NavigateTo("");
     }
 }
