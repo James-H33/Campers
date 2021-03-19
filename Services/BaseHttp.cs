@@ -12,7 +12,8 @@ namespace Campers.Services
   public class BaseHttp : IBaseHttp
   {
     private HttpClient _http;
-    private string servicesUrl = "https://localhost:6001";
+    // private string servicesUrl = "https://localhost:6001";
+    private string servicesUrl = "https://api-campers.azurewebsites.net";
     private readonly ILocalStorageService _storage;
 
     public BaseHttp(HttpClient http, ILocalStorageService storage)

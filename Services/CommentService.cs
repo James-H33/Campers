@@ -9,16 +9,17 @@ namespace Campers.Services
 {
   public class CommentService : ICommentService
   {
-    public HttpClient _http { get; set; }
+    public IBaseHttp _http { get; set; }
 
-    public CommentService(HttpClient http)
+    public CommentService(IBaseHttp http)
     {
       _http = http;
     }
 
     public async Task<List<Comment>> GetComments(int id)
     {
-      var comments = await _http.GetFromJsonAsync<List<Comment>>($"https://localhost:6001/api/comments/campground/{id}");
+      var res = await _http.Get($"/api/comments/campground/{id}");
+      var comments = Json.Deserialize<List<Comment>>(res.Content);
 
       return comments;
     }
@@ -27,9 +28,9 @@ namespace Campers.Services
     {
       try
       {
-        var url = $"https://localhost:6001/api/comments/campground/{id}";
-        var response = await _http.PostAsJsonAsync<CommentForCreate>(url, comment);
-        var result = await response.Content.ReadFromJsonAsync<Comment>();
+        var url = $"/api/comments/campground/{id}";
+        var res = await _http.Post(url, comment);
+        var result = Json.Deserialize<Comment>(res.Content);
 
         return result;
       }
