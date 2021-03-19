@@ -2,7 +2,7 @@
 
 @using Campers.Models
 @using Campers.Services.Interfaces
-@using Campers.Security 
+@using Campers.Security
 
 @inject IAuthService AuthService
 @inject IUserProfileService UserProfileService
@@ -63,7 +63,7 @@
                 }
                 else
                 {
-                    NavigationManager.NavigateTo("/");
+                    NavigationManager.NavigateTo("");
                 }
             }
             else

@@ -9,17 +9,17 @@
     {
         var state = await AuthenitcationStateTask;
 
-        if (state != null && state?.User?.Identity?.IsAuthenticated != true) 
+        if (state != null && state?.User?.Identity?.IsAuthenticated != true)
         {
             var returnUrl = Navigation.ToBaseRelativePath(Navigation.Uri);
 
             if (!String.IsNullOrEmpty(returnUrl))
             {
-                Navigation.NavigateTo($"/login?returnUrl={returnUrl}", true);
+                Navigation.NavigateTo($"login?returnUrl={returnUrl}", true);
             }
-            else 
+            else
             {
-                Navigation.NavigateTo("/login", true);
+                Navigation.NavigateTo("login", true);
             }
         }
     }

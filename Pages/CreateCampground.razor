@@ -49,6 +49,6 @@
       var profile = await UserProfileService.GetProfile();
       campground.UserId = profile.Id;
       var result = await CampgroundService.CreateCampground(campground);
-      NavigationManager.NavigateTo($"/campground/{result.Id}");
+      NavigationManager.NavigateTo($"campground/{result.Id}");
     }
 }
