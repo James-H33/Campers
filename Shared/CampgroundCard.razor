@@ -4,18 +4,18 @@
 
 <div class="campground-card" @onclick="@MoreInfo">
     <Card>
-        <div 
-            class="campground-card-image" 
+        <div
+            class="campground-card-image"
             style="background-image:url(@Item.Image)">
         </div>
-        
+
         <div class="campground-card-content">
             <label>@Item.Title</label>
         </div>
     </Card>
 </div>
 
-@code 
+@code
 {
     [Parameter]
     public Campground Item { get; set; }
@@ -23,6 +23,6 @@
 
     public void MoreInfo()
     {
-        NavigationManager.NavigateTo($"/campground/{Item.Id}");
+        NavigationManager.NavigateTo($"campground/{Item.Id}");
     }
 }
